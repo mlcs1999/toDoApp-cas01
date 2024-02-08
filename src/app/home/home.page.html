@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      <h1>Today</h1>
+      <p class="date">{{today | date:'fullDate'}}</p>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- prodji kroz listu svih taskova -->
+  <ion-list *ngFor="let task of tasks">
+    <ion-card>
+      <!-- header kartice -->
+      <ion-card-header>
+        <ion-card-title>{{task.name}}</ion-card-title>
+        <ion-item>
+          <ion-icon *ngIf="task.category== 'Low'" name="logo-ionic" color="warning"></ion-icon>
+          <ion-icon *ngIf="task.category== 'High'" name="logo-ionic" color="danger"></ion-icon>
+          <ion-label>&nbsp;{{task.category}}</ion-label>
+        </ion-item>
+      </ion-card-header>
+      <!-- sadrzaj kartice -->
+      <ion-card-content>
+        <p>{{task.date | date: 'fullDate'}}</p>
+        <ion-row>
+          <ion-button (click)="goToUpdatePage(task)">Update</ion-button>
+          <ion-button>Delete</ion-button>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="goToAddPage()">
+      <ion-icon name="add">Add</ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
+
